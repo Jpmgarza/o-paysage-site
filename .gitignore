@@ -1,0 +1,12 @@
+node_modules
+.next
+out
+.env
+.env.local
+# Holds the SMTP password on the server (Infomaniak has no env-var editor): never commit it.
+.env.production
+.env.*.local
+.DS_Store
+*.tsbuildinfo
+next-env.d.ts
+.vercel

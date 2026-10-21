@@ -1,0 +1,83 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* RGB channel triplets (not hex) so Tailwind's opacity modifiers, e.g. bg-moss/90,
+       can inject alpha via rgb(var(--color-x) / <alpha-value>) in tailwind.config.ts. */
+    --color-bg: 254 254 254;
+    --color-ink: 28 28 26;
+    --color-accent: 228 175 58;
+    --color-moss: 132 148 67;
+    --color-moss-soft: 132 148 67;
+    /* Moss darkened 17% for TEXT on light backgrounds: moss itself is only 3.31:1 on
+       white, under the 4.5:1 WCAG AA asks of body text; this is 4.54:1. Backgrounds
+       keep the brand moss. */
+    --color-moss-dark: 110 124 56;
+
+    --transition-fast: 150ms ease;
+    --transition-normal: 300ms ease;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: rgb(var(--color-bg));
+    color: rgb(var(--color-ink));
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Touch screens have no hover, so a tap needs its own feedback. Scoped to
+   * devices without hover so desktop clicks keep their hover styles alone. */
+  @media (hover: none) {
+    a:active,
+    button:active,
+    summary:active {
+      opacity: 0.7;
+    }
+  }
+
+  /* Two-tone focus ring, so it reaches the 3:1 non-text contrast AA asks of a focus
+   * indicator on every background: the gold alone is 1.98:1 on white and 1.67:1 on
+   * moss. The ink inner ring (box-shadow, filling the outline offset) carries it on
+   * light and green surfaces, the gold outer ring on the dark photo heroes. */
+  :focus-visible {
+    outline: 3px solid rgb(var(--color-accent));
+    outline-offset: 3px;
+    box-shadow: 0 0 0 3px rgb(var(--color-ink));
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@layer components {
+  .container-page {
+    @apply mx-auto w-full max-w-page px-5 sm:px-8 lg:px-12 xl:px-20;
+  }
+
+  .container-narrow {
+    @apply mx-auto w-full max-w-page px-5 sm:px-8 lg:px-16 xl:px-[120px];
+  }
+
+  .section-heading {
+    @apply text-[2rem] uppercase leading-[1.25] sm:text-[2.25rem] lg:text-heading;
+    font-weight: 700;
+  }
+}
