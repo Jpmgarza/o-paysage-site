@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, type Variants } from "framer-motion";
+import { m, type Variants } from "framer-motion";
 import { Star } from "lucide-react";
 
 const container: Variants = {
@@ -39,7 +39,7 @@ export function StarRating({ className = "", animated = false }: StarRatingProps
   }
 
   return (
-    <motion.div
+    <m.div
       className={`flex items-center ${className}`}
       role="img"
       aria-label="Note de 5 étoiles sur 5"
@@ -49,10 +49,10 @@ export function StarRating({ className = "", animated = false }: StarRatingProps
       viewport={{ once: true, margin: "-40px" }}
     >
       {Array.from({ length: 5 }).map((_, index) => (
-        <motion.span key={index} data-reveal variants={drop} className="inline-flex">
+        <m.span key={index} data-reveal variants={drop} className="inline-flex">
           <Star className="size-[18px] fill-accent text-accent" strokeWidth={0} />
-        </motion.span>
+        </m.span>
       ))}
-    </motion.div>
+    </m.div>
   );
 }

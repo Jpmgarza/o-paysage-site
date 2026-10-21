@@ -12,8 +12,10 @@ export const SITE = {
    *  the sitemap and the structured data all point here whatever URL the site
    *  is actually served from (a *.vercel.app preview included), so a copy on
    *  another host can never claim to be the original. Not read from the
-   *  environment: a variable set to the wrong host would silently break this. */
-  url: "https://www.o-paysage.ch",
+   *  environment: a variable set to the wrong host would silently break this.
+   *  The bare domain, not www: www.o-paysage.ch has no DNS record (checked
+   *  October 2026). If www is ever added, redirect it here, not the reverse. */
+  url: "https://o-paysage.ch",
   phone: "+41 (0) 79 407 54 27",
   phoneHref: "tel:+41794075427",
   email: "opaysage.nd@gmail.com",

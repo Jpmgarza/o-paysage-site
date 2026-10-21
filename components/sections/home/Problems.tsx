@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, type Variants } from "framer-motion";
+import { m, type Variants } from "framer-motion";
 import { AnimatedHeadline } from "@/components/ui/AnimatedHeadline";
 import { ButtonLink } from "@/components/ui/Button";
 import { Reveal } from "@/components/ui/Reveal";
@@ -43,7 +43,7 @@ function ProblemCard({ problem, index }: { problem: Problem; index: number }) {
   const delay = BASE_DELAY + index * STAGGER_STEP;
 
   return (
-    <motion.div
+    <m.div
       className="relative h-full"
       initial="hidden"
       whileInView="visible"
@@ -52,14 +52,14 @@ function ProblemCard({ problem, index }: { problem: Problem; index: number }) {
       {/* Stays fully hidden until the card in front finishes landing,
        * then grows/fades in on top of the now-settled card. */}
       {problem.highlighted && (
-        <motion.span
+        <m.span
           aria-hidden
           data-reveal
           variants={plateVariants(delay + CARD_DURATION)}
           className="absolute -bottom-4 -right-4 left-4 top-4 rounded-field bg-moss"
         />
       )}
-      <motion.article
+      <m.article
         data-reveal
         variants={cardVariants(delay)}
         className={`relative flex h-full flex-col gap-4 rounded-card border-2 border-moss bg-bg p-8 lg:p-9 ${
@@ -73,8 +73,8 @@ function ProblemCard({ problem, index }: { problem: Problem; index: number }) {
           <h3 className="text-card-title font-bold uppercase leading-[1.6]">{problem.title}</h3>
           <p className="text-body">{problem.description}</p>
         </div>
-      </motion.article>
-    </motion.div>
+      </m.article>
+    </m.div>
   );
 }
 

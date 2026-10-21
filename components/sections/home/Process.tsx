@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, type Variants } from "framer-motion";
+import { m, type Variants } from "framer-motion";
 import { AnimatedHeadline } from "@/components/ui/AnimatedHeadline";
 import { ButtonLink } from "@/components/ui/Button";
 import { Reveal } from "@/components/ui/Reveal";
@@ -51,7 +51,7 @@ export function Process() {
           className="section-heading max-w-[628px]"
         />
 
-        <motion.ol
+        <m.ol
           // Five columns only from xl: at 1024px each card is ~120px inside and
           // "PLANIFICATION" no longer fits. Two, then three columns in between.
           className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6 xl:grid-cols-5"
@@ -67,7 +67,7 @@ export function Process() {
                 {/* Grows left-to-right from this circle toward the next one,
                  * only once this step's card has finished landing. */}
                 {!isLast && (
-                  <motion.span
+                  <m.span
                     aria-hidden
                     data-reveal
                     variants={lineVariants(lineDelay(index))}
@@ -76,7 +76,7 @@ export function Process() {
                     className="absolute left-6 top-6 hidden h-0.5 w-[calc(100%+1.5rem)] origin-left bg-accent xl:block"
                   />
                 )}
-                <motion.span
+                <m.span
                   data-reveal
                   variants={circleVariants(circleDelay(index))}
                   className={`relative flex size-12 items-center justify-center rounded-full text-body shadow-card ${
@@ -84,8 +84,8 @@ export function Process() {
                   }`}
                 >
                   {step.number}
-                </motion.span>
-                <motion.div
+                </m.span>
+                <m.div
                   data-reveal
                   variants={cardVariants(cardDelay(index))}
                   className={`flex h-full flex-col gap-3 rounded-step border-2 border-moss p-5 shadow-card ${
@@ -99,11 +99,11 @@ export function Process() {
                   </h3>
                   {/* Softened on white only; on the moss card it must stay full ink. */}
                   <p className={`text-body ${index === 0 ? "" : "opacity-80"}`}>{step.description}</p>
-                </motion.div>
+                </m.div>
               </li>
             );
           })}
-        </motion.ol>
+        </m.ol>
 
         <div className="flex flex-col items-start gap-6 border-t border-ink/10 pt-10 lg:flex-row lg:items-center lg:justify-between">
           <Reveal as="p" className="max-w-[605px] text-body">

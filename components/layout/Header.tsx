@@ -1,6 +1,6 @@
 "use client";
 
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, m } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -106,7 +106,7 @@ export function Header() {
 
       <AnimatePresence>
         {isOpen && (
-          <motion.div
+          <m.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -135,7 +135,7 @@ export function Header() {
             <nav aria-label="Navigation principale" className="container-page mt-10">
               <ul className="flex flex-col gap-3">
                 {NAV_LINKS.map((link, index) => (
-                  <motion.li
+                  <m.li
                     key={link.href}
                     initial={{ opacity: 0, y: 16 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -148,7 +148,7 @@ export function Header() {
                     >
                       {link.label}
                     </Link>
-                  </motion.li>
+                  </m.li>
                 ))}
               </ul>
 
@@ -166,7 +166,7 @@ export function Header() {
                 </a>
               </div>
             </nav>
-          </motion.div>
+          </m.div>
         )}
       </AnimatePresence>
     </header>

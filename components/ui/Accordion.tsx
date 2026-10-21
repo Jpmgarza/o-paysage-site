@@ -1,10 +1,18 @@
 "use client";
 
-import { AnimatePresence, motion } from "framer-motion";
+import { m, type Variants } from "framer-motion";
 import { ArrowRight, ChevronDown } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
 import type { FaqItem } from "@/lib/data/faq";
+
+// Closed panels end at visibility:hidden, not just height 0, so their links
+// leave the tab order and screen readers skip them; opening makes the panel
+// visible before it starts to grow.
+const panel: Variants = {
+  open: { height: "auto", opacity: 1, visibility: "visible" },
+  closed: { height: 0, opacity: 0, transitionEnd: { visibility: "hidden" } },
+};
 
 export function Accordion({ items }: { items: FaqItem[] }) {
   const [openIndex, setOpenIndex] = useState<number>(0);
@@ -37,35 +45,34 @@ export function Accordion({ items }: { items: FaqItem[] }) {
               </button>
             </dt>
 
-            <AnimatePresence initial={false}>
-              {isOpen && (
-                <motion.dd
-                  id={`faq-panel-${index}`}
-                  role="region"
-                  aria-labelledby={`faq-trigger-${index}`}
-                  initial={{ height: 0, opacity: 0 }}
-                  animate={{ height: "auto", opacity: 1 }}
-                  exit={{ height: 0, opacity: 0 }}
-                  transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-                  className="overflow-hidden"
-                >
-                  <div className="flex max-w-[65ch] flex-col items-start pb-6 sm:pb-8">
-                    <p className="text-body">{item.answer}</p>
-                    {item.link && (
-                      <Link
-                        href={item.link.href}
-                        // Ink text with a moss underline: moss text on white is 3.4:1, short
-                        // of the 4.5:1 that 18px text needs.
-                        className="inline-flex min-h-11 items-center gap-1.5 text-body font-bold underline decoration-moss decoration-2 underline-offset-4 hover:text-moss-dark"
-                      >
-                        {item.link.label}
-                        <ArrowRight aria-hidden className="size-4" />
-                      </Link>
-                    )}
-                  </div>
-                </motion.dd>
-              )}
-            </AnimatePresence>
+            {/* Every answer is rendered, closed ones collapsed and hidden, so all
+             * of them are in the server HTML: the FAQPage structured data must
+             * match text on the page, and crawlers that run no JavaScript
+             * (most AI crawlers) only read that HTML. No role="region" here:
+             * a <dd> may not carry one, which also broke the <dl> structure. */}
+            <m.dd
+              id={`faq-panel-${index}`}
+              initial={false}
+              animate={isOpen ? "open" : "closed"}
+              variants={panel}
+              transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+              className="overflow-hidden"
+            >
+              <div className="flex max-w-[65ch] flex-col items-start pb-6 sm:pb-8">
+                <p className="text-body">{item.answer}</p>
+                {item.link && (
+                  <Link
+                    href={item.link.href}
+                    // Ink text with a moss underline: moss text on white is 3.4:1, short
+                    // of the 4.5:1 that 18px text needs.
+                    className="inline-flex min-h-11 items-center gap-1.5 text-body font-bold underline decoration-moss decoration-2 underline-offset-4 hover:text-moss-dark"
+                  >
+                    {item.link.label}
+                    <ArrowRight aria-hidden className="size-4" />
+                  </Link>
+                )}
+              </div>
+            </m.dd>
           </div>
         );
       })}

@@ -6,6 +6,10 @@ const scriptSrc =
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  // Optimised images are otherwise cached for 60 seconds only. A week, not a
+  // year: photos are replaced in place under the same name (see the colour
+  // grading notes), and a visitor's cached copy should not outlive that long.
+  images: { minimumCacheTTL: 604800 },
   // The Réalisations page was replaced by Services; old links land there.
   async redirects() {
     return [{ source: "/realisations", destination: "/services", permanent: true }];

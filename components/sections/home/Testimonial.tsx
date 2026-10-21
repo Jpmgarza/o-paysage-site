@@ -36,7 +36,8 @@ export function Testimonial() {
                   src="/images/terrasse-gres-cerame.webp"
                   alt="Terrasse en grès cérame posée par Ô Paysage devant une maison blanche à store banne, bordée d'une pelouse"
                   fill
-                  sizes="(max-width: 1024px) 100vw, 576px"
+                  // Full width less the page gutters and the 32px moss plate offset.
+                  sizes="(max-width: 640px) calc(100vw - 72px), (max-width: 1024px) calc(100vw - 96px), 576px"
                   className="object-cover"
                 />
               </div>

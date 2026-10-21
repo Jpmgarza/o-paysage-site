@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, type Variants } from "framer-motion";
+import { m, type Variants } from "framer-motion";
 import type { ElementType, ReactNode } from "react";
 
 const variants: Variants = {
@@ -17,7 +17,7 @@ type RevealProps = {
 };
 
 export function Reveal({ children, as = "div", className, delay = 0, id }: RevealProps) {
-  const Component = motion[as as keyof typeof motion] as typeof motion.div;
+  const Component = m[as as keyof typeof m] as typeof m.div;
 
   return (
     <Component

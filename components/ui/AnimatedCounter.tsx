@@ -2,7 +2,7 @@
 
 import {
   animate,
-  motion,
+  m,
   useInView,
   useMotionValue,
   useReducedMotion,
@@ -51,8 +51,8 @@ export function AnimatedCounter({
   }, [isInView, shouldReduceMotion, value, duration, delay, motionValue]);
 
   return (
-    <motion.span ref={ref} className={className}>
+    <m.span ref={ref} className={className}>
       {rounded}
-    </motion.span>
+    </m.span>
   );
 }

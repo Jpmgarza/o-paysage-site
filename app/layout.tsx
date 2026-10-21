@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
+import { MotionProvider } from "@/components/misc/MotionProvider";
 import { StructuredData } from "@/components/misc/StructuredData";
 import { SITE } from "@/lib/constants";
 import { HOME_DESCRIPTION, HOME_TITLE, SHARE_IMAGE } from "@/lib/seo";
@@ -77,9 +78,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         >
           Aller au contenu
         </a>
-        <Header />
-        <main id="contenu">{children}</main>
-        <Footer />
+        <MotionProvider>
+          <Header />
+          <main id="contenu">{children}</main>
+          <Footer />
+        </MotionProvider>
         <StructuredData />
       </body>
     </html>

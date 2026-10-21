@@ -20,7 +20,7 @@ function OverlaidPhoto({ service }: { service: Service }) {
           src={service.image.src}
           alt={service.image.alt}
           fill
-          sizes="(max-width: 1024px) 100vw, 737px"
+          sizes="(max-width: 640px) calc(100vw - 40px), (max-width: 1024px) calc(100vw - 64px), 737px"
           className="object-cover"
         />
       </div>
@@ -43,7 +43,8 @@ function PhotoMosaic({ service }: { service: Service }) {
             src={service.image.src}
             alt={service.image.alt}
             fill
-            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 354px"
+            // Half the row from sm, less the page gutters and the 24px gap.
+            sizes="(max-width: 640px) calc(100vw - 40px), (max-width: 1024px) calc(50vw - 44px), 354px"
             className="object-cover"
           />
         </div>
@@ -54,7 +55,7 @@ function PhotoMosaic({ service }: { service: Service }) {
           src={wide.src}
           alt={wide.alt}
           fill
-          sizes="(max-width: 1024px) 100vw, 737px"
+          sizes="(max-width: 640px) calc(100vw - 40px), (max-width: 1024px) calc(100vw - 64px), 737px"
           className="object-cover"
         />
       </div>

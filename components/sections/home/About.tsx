@@ -66,7 +66,8 @@ export function About() {
                 src="/images/nicolas-portrait.webp"
                 alt="Portrait de Nicolas Descloux, fondateur d'Ô Paysage, en montagne, avec casquette et lunettes de soleil, une vallée verte en arrière-plan"
                 fill
-                sizes="(max-width: 1024px) 100vw, 576px"
+                // Full width minus the page gutters (20px, 32px from sm, 48px from lg).
+                sizes="(max-width: 640px) calc(100vw - 40px), (max-width: 1024px) calc(100vw - 64px), 576px"
                 className="object-cover object-[center_58%] transition-transform duration-500 ease-out group-hover:scale-105"
               />
             </div>

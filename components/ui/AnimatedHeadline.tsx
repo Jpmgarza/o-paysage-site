@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, type Variants } from "framer-motion";
+import { m, type Variants } from "framer-motion";
 import type { ReactNode } from "react";
 
 const container: Variants = {
@@ -35,7 +35,7 @@ type AnimatedHeadlineProps = {
  */
 export function AnimatedHeadline({ text, as = "h2", className }: AnimatedHeadlineProps) {
   const segments: Segment[] = typeof text === "string" ? [{ text }] : text;
-  const Component = motion[as] as typeof motion.h2;
+  const Component = m[as] as typeof m.h2;
 
   let index = 0;
   const nodes: ReactNode[] = [];
@@ -50,13 +50,13 @@ export function AnimatedHeadline({ text, as = "h2", className }: AnimatedHeadlin
       if (!token) return;
       nodes.push(
         <span key={`w-${index++}`} className="inline-block overflow-hidden align-bottom">
-          <motion.span
+          <m.span
             data-reveal
             className={`inline-block ${segment.className ?? ""}`}
             variants={word}
           >
             {token}
-          </motion.span>
+          </m.span>
         </span>,
       );
       nodes.push(<span key={`s-${index++}`}> </span>);
