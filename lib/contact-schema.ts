@@ -20,7 +20,7 @@ export const ContactSchema = z.object({
     .or(z.literal("")),
   message: z.string().trim().min(10, "Décrivez votre projet en quelques mots.").max(2000),
   // Spam traps: bots fill hidden fields and submit instantly.
-  company: z.literal("").optional(),
+  hp: z.literal("").optional(),
   startedAt: z.number().optional(),
 });
 

@@ -42,7 +42,7 @@ export function ContactForm({ submitLabel = "Envoyer ma demande" }: { submitLabe
     formState: { errors },
   } = useForm<ContactInput>({
     resolver: zodResolver(ContactSchema),
-    defaultValues: { name: "", email: "", phone: "", service: "", message: "", company: "" },
+    defaultValues: { name: "", email: "", phone: "", service: "", message: "", hp: "" },
   });
 
   const onSubmit = handleSubmit(async (values) => {
@@ -179,10 +179,21 @@ export function ContactForm({ submitLabel = "Envoyer ma demande" }: { submitLabe
         {errors.message && <p className={errorClass}>{errors.message.message}</p>}
       </div>
 
-      {/* Spam trap — hidden from people, tempting for bots. */}
-      <div aria-hidden className="absolute -left-[9999px] h-0 w-0 overflow-hidden">
-        <label htmlFor="contact-company">Société</label>
-        <input id="contact-company" type="text" tabIndex={-1} {...register("company")} />
+      {/* Spam trap — bots reading the HTML fill it, people never see it. It was
+       * once a "Société" field moved off-screen, and browsers autofilled it with
+       * the visitor's company: validation then failed on a field nobody could
+       * see and the button did nothing. So: display:none (browsers do not
+       * autofill fields that are not rendered), a name and label that match no
+       * autofill category, and autocomplete off. */}
+      <div aria-hidden className="hidden">
+        <label htmlFor="contact-hp">Ne pas remplir</label>
+        <input
+          id="contact-hp"
+          type="text"
+          tabIndex={-1}
+          autoComplete="off"
+          {...register("hp")}
+        />
       </div>
 
       <button

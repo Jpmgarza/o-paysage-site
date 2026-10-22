@@ -131,7 +131,7 @@ export async function submitContactForm(input: unknown): Promise<ContactResult> 
 
   const data = parsed.data;
 
-  if (data.company) return { ok: false, reason: "invalid" };
+  if (data.hp) return { ok: false, reason: "invalid" };
 
   if (data.startedAt && Date.now() - data.startedAt < MIN_FILL_TIME_MS) {
     return { ok: false, reason: "invalid" };
