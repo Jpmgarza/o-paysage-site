@@ -63,10 +63,8 @@ export function ContactForm({ submitLabel = "Envoyer ma demande" }: { submitLabe
       <div className="flex flex-col items-start gap-3 rounded-card border-[2.5px] border-moss bg-moss-soft p-8">
         <CheckCircle2 aria-hidden className="size-10 text-moss" />
         <h3 className="text-card-title font-bold uppercase">Demande envoyée</h3>
-        <p className="text-body">
-          Merci ! Nicolas vous répond personnellement {SITE.replyTime} pour convenir d&apos;une
-          visite sur place.
-        </p>
+        {/* No promise of a site visit: not every request is a garden job. */}
+        <p className="text-body">Merci ! Nicolas vous répond personnellement {SITE.replyTime}.</p>
       </div>
     );
   }

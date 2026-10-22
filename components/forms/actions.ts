@@ -80,8 +80,7 @@ function confirmationHtml(name: string): string {
       <div style="border: 1px solid #e5e5e0; border-top: 0; border-radius: 0 0 8px 8px; padding: 24px;">
         <p>Bonjour ${escapeHtml(name)},</p>
         <p style="line-height: 1.6;">
-          Merci pour votre demande. Je l'ai bien reçue et je vous réponds personnellement ${escapeHtml(SITE.replyTime)}
-          afin de convenir d'une visite sur place. Le devis est gratuit et sans engagement.
+          Merci pour votre demande. Je l'ai bien reçue et je vous réponds personnellement ${escapeHtml(SITE.replyTime)}.
         </p>
         <p style="margin-top: 24px; padding: 16px; background: #f7f7f4; border-left: 4px solid #e4af3a; border-radius: 4px;">
           ${escapeHtml(SITE.owner)}<br />
