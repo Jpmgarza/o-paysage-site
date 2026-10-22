@@ -100,6 +100,11 @@ async function sendMail(options: {
   replyTo?: string;
 }): Promise<void> {
   if (!process.env.SMTP_HOST || !process.env.SMTP_USER) {
+    // In production this must fail: skipping silently showed visitors a
+    // success message while their request went nowhere.
+    if (process.env.NODE_ENV === "production") {
+      throw new Error("SMTP non configuré (SMTP_HOST / SMTP_USER manquant)");
+    }
     console.warn("[contact] SMTP non configuré — e-mail non envoyé:", {
       to: options.to,
       subject: options.subject,
@@ -114,10 +119,9 @@ async function sendMail(options: {
     auth: { user: process.env.SMTP_USER, pass: process.env.SMTP_PASS },
   });
 
-  await transporter.sendMail({
-    from: process.env.SMTP_FROM ?? `"${SITE.name}" <${process.env.SMTP_USER}>`,
-    ...options,
-  });
+  // Always from the site's own address, never from the environment, so a stale
+  // SMTP_FROM on the server cannot change it.
+  await transporter.sendMail({ from: `"${SITE.name}" <${SITE.email}>`, ...options });
 }
 
 export async function submitContactForm(input: unknown): Promise<ContactResult> {
@@ -139,7 +143,7 @@ export async function submitContactForm(input: unknown): Promise<ContactResult> 
 
   try {
     await sendMail({
-      to: process.env.SMTP_TO ?? SITE.email,
+      to: SITE.email,
       subject: `Nouvelle demande — ${data.name} — ${serviceLabel(data.service)}`,
       html: notificationHtml(data),
       replyTo: data.email,

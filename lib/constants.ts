@@ -18,7 +18,9 @@ export const SITE = {
   url: "https://o-paysage.ch",
   phone: "+41 (0) 79 407 54 27",
   phoneHref: "tel:+41794075427",
-  email: "opaysage.nd@gmail.com",
+  /** The public address. Contact form mail is sent from it and delivered to
+   *  it, so the SMTP login (SMTP_USER) must be this mailbox. */
+  email: "info@o-paysage.ch",
   address: "Rte du Château 19C, 1566 Saint-Aubin",
   /** Years of activity as an independent, shown in the hero counter and every
    *  "X ans d'expérience" line. Counted from the year he started (2009), so it
