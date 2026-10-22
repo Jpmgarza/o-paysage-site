@@ -10,9 +10,22 @@ const nextConfig = {
   // year: photos are replaced in place under the same name (see the colour
   // grading notes), and a visitor's cached copy should not outlive that long.
   images: { minimumCacheTTL: 604800 },
-  // The Réalisations page was replaced by Services; old links land there.
   async redirects() {
-    return [{ source: "/realisations", destination: "/services", permanent: true }];
+    // www.o-paysage.ch serves the same site (an Infomaniak alias); send it to
+    // the bare domain, the canonical one (SITE.url). Matched on the forwarded
+    // host as well as Host, since the Infomaniak proxy may rewrite Host — if
+    // neither carries www, the rule simply does not fire.
+    const toBareDomain = { destination: "https://o-paysage.ch/:path*", permanent: true };
+    return [
+      { source: "/:path*", has: [{ type: "host", value: "www\\.o-paysage\\.ch" }], ...toBareDomain },
+      {
+        source: "/:path*",
+        has: [{ type: "header", key: "x-forwarded-host", value: "www\\.o-paysage\\.ch" }],
+        ...toBareDomain,
+      },
+      // The Réalisations page was replaced by Services; old links land there.
+      { source: "/realisations", destination: "/services", permanent: true },
+    ];
   },
   async headers() {
     return [
