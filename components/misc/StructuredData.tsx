@@ -11,7 +11,9 @@ const business = {
   name: SITE.name,
   legalName: SITE.legalName,
   url: SITE.url,
-  image: `${SITE.url}/images/og-share.jpg`,
+  // The share image, then one of his own jobs (a terrace he laid), so the
+  // business is not represented by its logo alone.
+  image: [`${SITE.url}/images/og-share.jpg`, `${SITE.url}/images/terrasse-gres-cerame.webp`],
   logo: `${SITE.url}/icons/icon-512.png`,
   description:
     "Paysagiste indépendant dans la Broye, actif ponctuellement dans les régions de Fribourg et de Neuchâtel : entretien de jardins, contrats d'entretien annuel, petits chantiers extérieurs, entretien pour régies et petit débarras.",
@@ -30,6 +32,7 @@ const business = {
   },
   geo: { "@type": "GeoCoordinates", ...SITE.geo },
   hasMap: SITE.addressMapUrl,
+  sameAs: SITE.profiles,
   // The Broye is where he is based and mainly works; the other two are
   // occasional. Listed in that order.
   areaServed: [
@@ -51,8 +54,8 @@ const business = {
       },
     })),
   },
-  // Still to add once confirmed with Nicolas: sameAs (his public Google
-  // Business profile URL) and openingHoursSpecification.
+  // Still to add once confirmed with Nicolas: openingHoursSpecification
+  // (local.ch shows Mon-Fri 07:30-12:00 and 13:00-18:00, unconfirmed).
 };
 
 const website = {

@@ -9,7 +9,12 @@ const nextConfig = {
   // Optimised images are otherwise cached for 60 seconds only. A week, not a
   // year: photos are replaced in place under the same name (see the colour
   // grading notes), and a visitor's cached copy should not outlive that long.
-  images: { minimumCacheTTL: 604800 },
+  // 1440 and 1600 added to Next's default widths: without them a full-width
+  // hero on a ~1350px laptop screen jumped straight to the 1920px file.
+  images: {
+    minimumCacheTTL: 604800,
+    deviceSizes: [640, 750, 828, 1080, 1200, 1440, 1600, 1920, 2048, 3840],
+  },
   async redirects() {
     // www.o-paysage.ch serves the same site (an Infomaniak alias); send it to
     // the bare domain, the canonical one (SITE.url). Matched on the forwarded

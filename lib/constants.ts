@@ -38,6 +38,13 @@ export const SITE = {
   geo: { latitude: 46.888313, longitude: 6.982794 },
   addressMapUrl:
     "https://www.google.com/maps/place/%C3%94+Paysage/@46.888313,6.9802191,17z/data=!3m1!4b1!4m6!3m5!1s0x478e737d516b71df:0xdd86b6b9bd148165!8m2!3d46.888313!4d6.982794!16s%2Fg%2F11f_wm8n7f?entry=ttu&g_ep=EgoyMDI2MDkxNS4wIKXMDSoASAFQAw%3D%3D",
+  /** His own listings elsewhere, given to search engines as `sameAs` so they
+   *  tie the site to the same business: the Google Maps place (the cid of
+   *  addressMapUrl) and his local.ch Premium listing. */
+  profiles: [
+    "https://maps.google.com/?cid=15962646838118744421",
+    "https://www.local.ch/fr/d/st-aubin-fr/1566/paysagistes/o-paysage-9wyoRtEJNcoWP52_I0dm6w",
+  ],
   /** Where he is based and mainly active; used as "dans {region}". He only
    *  travels to the regions of Fribourg and Neuchâtel occasionally. */
   region: "la Broye",
